@@ -1,0 +1,272 @@
+Last login: Mon Nov 25 22:07:35 on ttys000
+➜  ~ myaql
+zsh: command not found: myaql
+➜  ~ mysql
+zsh: command not found: mysql
+➜  ~ /mysql
+zsh: no such file or directory: /mysql
+➜  ~ /mysql -u root - p
+zsh: no such file or directory: /mysql
+➜  ~ alias mysql=/usr/local/mysql/bin/mysql
+➜  ~ mysql
+ERROR 1045 (28000): Access denied for user 'juanfelipequiroga'@'localhost' (using password: NO)
+➜  ~ mysql --user=root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.40 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> status
+--------------
+/usr/local/mysql/bin/mysql  Ver 8.0.40 for macos14 on x86_64 (MySQL Community Server - GPL)
+
+Connection id:		9
+Current database:	
+Current user:		root@localhost
+SSL:			Not in use
+Current pager:		less
+Using outfile:		''
+Using delimiter:	;
+Server version:		8.0.40 MySQL Community Server - GPL
+Protocol version:	10
+Connection:		Localhost via UNIX socket
+Server characterset:	utf8mb4
+Db     characterset:	utf8mb4
+Client characterset:	utf8mb4
+Conn.  characterset:	utf8mb4
+UNIX socket:		/tmp/mysql.sock
+Binary data as:		Hexadecimal
+Uptime:			37 min 42 sec
+
+Threads: 2  Questions: 5  Slow queries: 0  Opens: 117  Flush tables: 3  Open tables: 38  Queries per second avg: 0.002
+--------------
+
+mysql> exit
+Bye
+➜  ~ clear
+
+➜  ~ mysql
+ERROR 1045 (28000): Access denied for user 'juanfelipequiroga'@'localhost' (using password: NO)
+➜  ~ mysql --user=root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.40 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select version(), current_date
+    -> ;
++-----------+--------------+
+| version() | current_date |
++-----------+--------------+
+| 8.0.40    | 2024-11-25   |
++-----------+--------------+
+1 row in set (0.01 sec)
+
+mysql> select version();
++-----------+
+| version() |
++-----------+
+| 8.0.40    |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2024-11-25 23:07:02 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select
+    -> user()
+    -> ,
+    -> current_date;
++----------------+--------------+
+| user()         | current_date |
++----------------+--------------+
+| root@localhost | 2024-11-25   |
++----------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> clear
+mysql> ;
+ERROR: 
+No query specified
+
+mysql> exit;
+Bye
+➜  ~ clear
+
+➜  ~ cd documents
+➜  documents mysql --user=root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.40 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.03 sec)
+
+mysql> create database tienda_online;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| tienda_online      |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create table if not exists productos(
+    -> Nombre var_char(20) not null,
+    -> Categoría var_char(20) not null,
+    -> Precio decimal(5,2) not null,
+    -> Stock smallint(2) not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'var_char(20) not null,
+Categoría var_char(20) not null,
+Precio decimal(5,2) not' at line 2
+mysql> CREATE TABLE productos(
+    -> Nombre VAR_CHAR;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VAR_CHAR' at line 2
+mysql> create table if not exists productos (
+    -> Nombre varchar(20) NOT NULL,
+    -> Categoría varchar(20) NOT NULL,
+    -> Precio decimal(6,2) NOT NULL,
+    -> Stock smallint(2) NOT NULL
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> tienda_online
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tienda_online' at line 1
+mysql> open tienda_online;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'open tienda_online' at line 1
+mysql> use tienda_online
+Database changed
+mysql> create table if not exists productos (
+    -> Nombre varchar(20) NOT NULL,
+    -> Categoría varchar(20) NOT NULL,
+    -> Precio decimal(6,2) NOT NULL,
+    -> Stock smallint(2) NOT NULL
+    -> );
+Query OK, 0 rows affected, 1 warning (0.16 sec)
+
+mysql> show table prodcutos;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'prodcutos' at line 1
+mysql> show table productos;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'productos' at line 1
+mysql> show tables;
++-------------------------+
+| Tables_in_tienda_online |
++-------------------------+
+| productos               |
++-------------------------+
+1 row in set (0.02 sec)
+
+mysql> describe productos
+    -> ;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| Nombre     | varchar(20)  | NO   |     | NULL    |       |
+| Categoría  | varchar(20)  | NO   |     | NULL    |       |
+| Precio     | decimal(6,2) | NO   |     | NULL    |       |
+| Stock      | smallint     | NO   |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+mysql> INSERT INTO productos (Nombre, Categoría, Precio, Stock) values('Laptop', 'Electrónica', 1200.00,10);
+Query OK, 1 row affected (0.38 sec)
+
+mysql> Insert into productos (Nombre, Categoría, Precio, Stock) values('Mouse','Electrónica', 20.00,50);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into productos (Nombre, Categoría, precio, stock) values('Camiseta','Ropa',20.00,50); 
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into productos (Nombre, Categoría, Precio, Stock) values('Taza', 'Hogar', 5.00,100);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into productos (Nombre, Categoría, Precio, Stock) values('Celular', 'Electrónica', 800.00,15);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show productos
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'productos' at line 1
+mysql> select * from[productos];
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[productos]' at line 1
+mysql> select * from productos
+    -> ;
++----------+--------------+---------+-------+
+| Nombre   | Categoría    | Precio  | Stock |
++----------+--------------+---------+-------+
+| Laptop   | Electrónica  | 1200.00 |    10 |
+| Mouse    | Electrónica  |   20.00 |    50 |
+| Camiseta | Ropa         |   20.00 |    50 |
+| Taza     | Hogar        |    5.00 |   100 |
+| Celular  | Electrónica  |  800.00 |    15 |
++----------+--------------+---------+-------+
+5 rows in set (0.04 sec)
+
+mysql> select * from productos where Categoría = 'Electrónica';
++---------+--------------+---------+-------+
+| Nombre  | Categoría    | Precio  | Stock |
++---------+--------------+---------+-------+
+| Laptop  | Electrónica  | 1200.00 |    10 |
+| Mouse   | Electrónica  |   20.00 |    50 |
+| Celular | Electrónica  |  800.00 |    15 |
++---------+--------------+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> update productos set Stock=49 where Nombre='Mouse';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from productos where Nombre='Mouse';
++--------+--------------+--------+-------+
+| Nombre | Categoría    | Precio | Stock |
++--------+--------------+--------+-------+
+| Mouse  | Electrónica  |  20.00 |    49 |
++--------+--------------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> 
